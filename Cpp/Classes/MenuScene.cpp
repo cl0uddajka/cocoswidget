@@ -60,7 +60,7 @@ bool MenuScene::init()
 	m_vMenuItems.push_back("Slider Test");
 
 	CWidgetLayout* pLayout = CWidgetLayout::create();
-	pLayout->setMultiTouchEnabled(true);
+	pLayout->setMultiTouchEnabled(false);
 	addChild(pLayout);
 
 	m_pMenuTableView = CTableView::create(CCSize(700, 640));
