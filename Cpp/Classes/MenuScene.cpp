@@ -19,7 +19,7 @@
 #define MENU_ITEM_ID_TEXT 2
 #define MENU_ITEM_ID_SCROLL 3
 #define MENU_ITEM_ID_TABLE 4
-#define MENU_ITEM_ID_TABLEGRID 5
+#define MENU_ITEM_ID_GRIDPAGE 5
 #define MENU_ITEM_ID_GRID 6
 #define MENU_ITEM_ID_PANEL 7
 #define MENU_ITEM_ID_PAGE 8
@@ -49,7 +49,7 @@ bool MenuScene::init()
 	m_vMenuItems.push_back("Label Test");
 	m_vMenuItems.push_back("ScrollView Test");
 	m_vMenuItems.push_back("TableView Test");
-	m_vMenuItems.push_back("TableGridView Test");
+	m_vMenuItems.push_back("PageGridView Test");
 	m_vMenuItems.push_back("GridView Test");
 	m_vMenuItems.push_back("Panel Test");
 	m_vMenuItems.push_back("PageView Test");
@@ -167,7 +167,7 @@ void MenuScene::onTextClick(CCObject* pSender)
 			pushCTableViewTestScene();
 		}
 		break;
-	case MENU_ITEM_ID_TABLEGRID:
+	case MENU_ITEM_ID_GRIDPAGE:
 		{
 			pushCGridPageViewTestScene();
 		}
