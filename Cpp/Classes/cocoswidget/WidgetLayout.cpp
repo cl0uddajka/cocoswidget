@@ -300,18 +300,6 @@ bool CWidgetLayout::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 			}
 			m_pSelectedWidget = NULL;
 		}
-
-		//CWidget *pTouchWidget = collisionWithWidget(touchPointInView);
-		/*if( pTouchWidget )
-		{
-			m_pSelectedWidget = pTouchWidget;
-			if( m_pSelectedWidget->executeTouchBeganHandler(pTouch) != eWidgetTouchNone )
-			{
-                m_bIsTouched = true;
-                m_fTouchedDuration = 0.0f;
-				return true;
-			}	
-		}*/
 	}
 	return false;
 }
@@ -429,29 +417,6 @@ void CWidgetLayout::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 				}
 			}
 
-
-			//CWidget *pTouchWidget = collisionWithWidget(touchPointInView);
-			//if( pTouchWidget )
-			//{
-			//	// make sure it can not be happened on the same widget
-			//	map<int, tagMultiTouchKeeper>::iterator mitr = m_mMultiTouchKeeper.begin();
-			//	for(; mitr != m_mMultiTouchKeeper.end(); ++mitr)
-			//	{
-			//		if( mitr->second.pWidget == pTouchWidget )
-			//		{
-			//			return;
-			//		}
-			//	}
-
-			//	if( pTouchWidget->executeTouchBeganHandler(pTouch) != eWidgetTouchNone )
-			//	{
-			//		tagMultiTouchKeeper tKeeper;
-			//		tKeeper.fTouchedDuration = 0.0f;
-			//		tKeeper.pWidget = pTouchWidget;
-			//		tKeeper.pLongClickedWidgetObject = NULL;
-			//		m_mMultiTouchKeeper[pTouch->getID()] = tKeeper;
-			//	}	
-			//}
 		}
 	}
 }

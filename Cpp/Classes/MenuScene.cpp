@@ -237,7 +237,7 @@ bool BaseTestScene::init()
 	setPosition(CCPointZero);
 
 	m_pLayout = CWidgetLayout::create();
-	m_pLayout->setMultiTouchEnabled(false);
+	m_pLayout->setMultiTouchEnabled(true);
 	addChild(m_pLayout);
 
 	m_pNextBtn = CButton::create("next1.png", "next2.png");
