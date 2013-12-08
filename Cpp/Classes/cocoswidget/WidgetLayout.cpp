@@ -274,6 +274,8 @@ void CWidgetLayout::onExit()
 
 bool CWidgetLayout::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
+	CCLOG("began");
+
 	if( m_bTouchEnabled && m_bVisible && m_pChildren && m_pChildren->count() > 0 )
 	{
 		CCPoint touchPointInView = convertToNodeSpace(pTouch->getLocation());
