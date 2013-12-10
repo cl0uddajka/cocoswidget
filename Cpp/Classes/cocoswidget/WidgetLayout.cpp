@@ -158,7 +158,7 @@ void CWidgetLayout::setTouchPriority(int nTouchPriority)
 	if( m_nTouchPriority != nTouchPriority )
 	{
 		m_nTouchPriority = nTouchPriority;
-		if( m_bTouchEnabled )
+		if( m_bTouchEnabled && m_bRunning )
 		{
 			CCTouchDispatcher* pDispatcher = CCDirector::sharedDirector()->getTouchDispatcher();
 			pDispatcher->setPriority(nTouchPriority, this);
