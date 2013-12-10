@@ -290,7 +290,7 @@ extern "C" {
 #include "tolua_fix.h"
 }
 
-#include "lua_cocoswidget.h"
+#include "lua_cocos2dx_widget.h"
 #include "../CocosWidget/cocos-widget.h"
 #include <map>
 #include <string>
