@@ -59,10 +59,10 @@ public:
 	virtual void onTouchEnded(CCTouch *pTouch, float fDuration);
 	virtual void onTouchCancelled(CCTouch *pTouch, float fDuration);
 
-    static CLabelBMFont* create(const char *str, const char *fntFile, float width, CCTextAlignment alignment, CCPoint imageOffset);
-	static CLabelBMFont* create(const char *str, const char *fntFile, float width, CCTextAlignment alignment);
-	static CLabelBMFont* create(const char *str, const char *fntFile, float width);
-	static CLabelBMFont* create(const char *str, const char *fntFile);
+    static CLabelBMFont* create(const char *pString, const char *fntFile, float width, CCTextAlignment alignment, CCPoint imageOffset);
+	static CLabelBMFont* create(const char *pString, const char *fntFile, float width, CCTextAlignment alignment);
+	static CLabelBMFont* create(const char *pString, const char *fntFile, float width);
+	static CLabelBMFont* create(const char *pString, const char *fntFile);
     static CLabelBMFont* create();
 
 	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelBMFont);

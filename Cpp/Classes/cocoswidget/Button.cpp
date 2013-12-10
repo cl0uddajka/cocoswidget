@@ -549,9 +549,18 @@ void CButton::setEnabled(bool bEnabled)
 		}
 		else
 		{
-			CC_SAFE_SET_VISIBLE(m_pNormalImage, false);
-			CC_SAFE_SET_VISIBLE(m_pSelectedImage, false);
-			CC_SAFE_SET_VISIBLE(m_pDisabledImage, true);
+			if( m_pDisabledImage )
+			{
+				CC_SAFE_SET_VISIBLE(m_pNormalImage, false);
+				CC_SAFE_SET_VISIBLE(m_pSelectedImage, false);
+				CC_SAFE_SET_VISIBLE(m_pDisabledImage, true);
+			}
+			else
+			{
+				CC_SAFE_SET_VISIBLE(m_pNormalImage, true);
+				CC_SAFE_SET_VISIBLE(m_pSelectedImage, false);
+				CC_SAFE_SET_VISIBLE(m_pDisabledImage, false);
+			}
 		}
 	}
 }

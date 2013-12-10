@@ -59,8 +59,8 @@ public:
 	virtual void onTouchEnded(CCTouch *pTouch, float fDuration);
 	virtual void onTouchCancelled(CCTouch *pTouch, float fDuration);
 
-    static CLabelAtlas * create(const char *string, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
-    static CLabelAtlas* create(const char *string, const char *fntFile);
+    static CLabelAtlas * create(const char *pString, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
+    static CLabelAtlas* create(const char *pString, const char *fntFile);
 
 	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelAtlas);
 };
