@@ -1,0 +1,26 @@
+class CControlView : public CCNodeRGBA, public CWidget, public CControlableProtocol
+{
+	CControlView();
+	virtual ~CControlView();
+
+	virtual bool init();
+	virtual bool initWithFile(const char* pBaseBoard, const char* pJoystick);
+	virtual void setContentSize(const CCSize& tContentSize);
+	
+	void setRadius(float fRadius);
+	float getRadius() const;
+	void setRelocateWithAnimation(bool bAni);
+	bool isRelocateWithAnimation() const;
+
+	virtual void setBaseBoardImage(const char* pFile);
+	virtual void setJoystickImage(const char* pFile);
+	virtual void setBaseBoardSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setJoystickSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setBaseBoardTexture(CCTexture2D *pTexture);
+	virtual void setJoystickTexture(CCTexture2D *pTexture);
+	virtual void setBaseBoardSpriteFrameName(const char* pSpriteName);
+	virtual void setJoystickSpriteFrameName(const char* pSpriteName);
+
+	static CControlView* create();
+	static CControlView* create(const char* pBaseBoard, const char* pJoystick);
+};

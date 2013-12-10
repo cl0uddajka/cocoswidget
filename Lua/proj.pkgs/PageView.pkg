@@ -1,0 +1,12 @@
+class CPageViewCell : public CTableViewCell
+{
+	CPageViewCell();
+};
+
+class CPageView : public CTableView, public CPageChangeableProtocol
+{
+	CPageView();
+	static CPageView* create(const CCSize& tPageSize);
+	static CPageView* create(const CCSize& tPageSize, unsigned int uPageCount,
+		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
+};

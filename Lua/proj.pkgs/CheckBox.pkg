@@ -1,0 +1,40 @@
+class CCheckBox : public CCNodeRGBA, public CWidget, public CCheckableProtocol, public CClickableProtocol, public CLongClickableProtocol
+{
+	CCheckBox();
+	virtual ~CCheckBox();
+
+	virtual bool init();
+	virtual void setChecked(bool bChecked);
+	virtual void setEnabled(bool bEnabled);
+	virtual void setContentSize(const CCSize& tContentSize);
+
+	virtual void setNormalImage(const char* pFile);
+	virtual void setNormalPressImage(const char* pFile);
+	virtual void setCheckedImage(const char* pFile);
+	virtual void setCheckedPressImage(const char* pFile);
+	virtual void setDisabledNormalImage(const char* pFile);
+	virtual void setDisabledCheckedImage(const char* pFile);
+
+	virtual void setNormalSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setNormalPressSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setCheckedSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setCheckedPressSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setDisabledNormalSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setDisabledCheckedSpriteFrame(CCSpriteFrame* pFrame);
+
+	virtual void setNormalTexture(CCTexture2D *pTexture);
+	virtual void setNormalPressTexture(CCTexture2D *pTexture);
+	virtual void setCheckedTexture(CCTexture2D *pTexture);
+	virtual void setCheckedPressTexture(CCTexture2D *pTexture);
+	virtual void setDisabledNormalTexture(CCTexture2D *pTexture);
+	virtual void setDisabledCheckedTexture(CCTexture2D *pTexture);
+
+	virtual void setNormalSpriteFrameName(const char* pSpriteName);
+	virtual void setNormalPressSpriteFrameName(const char* pSpriteName);
+	virtual void setCheckedSpriteFrameName(const char* pSpriteName);
+	virtual void setCheckedPressSpriteFrameName(const char* pSpriteName);
+	virtual void setDisabledNormalSpriteFrameName(const char* pSpriteName);
+	virtual void setDisabledCheckedSpriteFrameName(const char* pSpriteName);
+
+	static CCheckBox* create();
+};

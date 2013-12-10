@@ -1,0 +1,12 @@
+class CImageView : public CCSprite, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+	CImageView();
+	
+	static CImageView* create();
+	static CImageView* create(const char *pszFileName);
+	static CImageView* create(const char *pszFileName, const CCRect& rect);
+	static CImageView* createWithTexture(CCTexture2D *pTexture);
+	static CImageView* createWithTexture(CCTexture2D *pTexture, const CCRect& rect);
+	static CImageView* createWithSpriteFrame(CCSpriteFrame *pSpriteFrame);
+	static CImageView* createWithSpriteFrameName(const char *pszSpriteFrameName);
+};

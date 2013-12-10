@@ -1,0 +1,11 @@
+class CLabelBMFont : public CCLabelBMFont, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+	CLabelBMFont();
+	virtual ~CLabelBMFont();
+	
+    static CLabelBMFont* create(const char *pString, const char *fntFile, float width, CCTextAlignment alignment, CCPoint imageOffset);
+	static CLabelBMFont* create(const char *pString, const char *fntFile, float width, CCTextAlignment alignment);
+	static CLabelBMFont* create(const char *pString, const char *fntFile, float width);
+	static CLabelBMFont* create(const char *pString, const char *fntFile);
+    static CLabelBMFont* create();
+};

@@ -1,0 +1,8 @@
+class CLabelAtlas : public CCLabelAtlas, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+	CLabelAtlas();
+	virtual ~CLabelAtlas();
+
+    static CLabelAtlas * create(const char *pString, const char *charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
+    static CLabelAtlas* create(const char *pString, const char *fntFile);
+};

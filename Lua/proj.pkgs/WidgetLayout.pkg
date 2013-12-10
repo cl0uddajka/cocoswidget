@@ -1,0 +1,16 @@
+class CWidgetLayout : public CCNodeRGBA, public CCTouchDelegate
+{
+	CWidgetLayout();
+	virtual ~CWidgetLayout();
+	virtual bool init();
+	
+	virtual int getTouchPriority();
+	virtual void setTouchPriority(int nTouchPriority);
+	virtual bool isTouchEnabled();
+	virtual void setTouchEnabled(bool bTouchEnabled);
+	virtual CCObject* findViewById(const char* id);
+	bool isMultiTouchEnabled() const;
+	void setMultiTouchEnabled(bool bEnabled);
+
+	static CWidgetLayout* create();
+};

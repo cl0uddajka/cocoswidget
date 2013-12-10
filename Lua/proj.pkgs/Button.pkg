@@ -1,0 +1,40 @@
+class CButton : public CCNodeRGBA, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+	CButton();
+	virtual ~CButton();
+	
+	virtual bool init();
+	virtual void setContentSize(const CCSize& contentSize);
+	virtual void setEnabled(bool bEnabled);
+	void setLabelOffset(const CCPoint& tOffset);
+	virtual CLabel* getLabel();
+	virtual bool isScale9Enabled();
+	virtual void setScale9Enabled(bool bEnabled);
+	virtual bool initWith9Sprite(const CCSize& tSize, const char* pNormal, const char* pSelected, const char* pDisabled);
+	virtual bool initWithFile(const char* pNormal, const char* pSelected, const char* pDisabled);
+	virtual void updateCascadeLabelContentSize(const CCSize& tOffsetSize = CCSizeZero);
+
+	virtual void setNormalImage(const char* pFile);
+	virtual void setSelectedImage(const char* pFile);
+	virtual void setDisabledImage(const char* pFile);
+
+	virtual void setNormalTexture(CCTexture2D *pTexture);
+	virtual void setSelectedTexture(CCTexture2D *pTexture);
+	virtual void setDisabledTexture(CCTexture2D *pTexture);
+	
+	virtual void setNormalSpriteFrameName(const char* pSpriteName);
+	virtual void setSelectedSpriteFrameName(const char* pSpriteName);
+	virtual void setDisabledSpriteFrameName(const char* pSpriteName);
+
+	virtual void setNormalSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setSelectedSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setDisabledSpriteFrame(CCSpriteFrame* pFrame);
+
+	virtual CCNode* getNormalImage();
+	virtual CCNode* getSelectedImage();
+	virtual CCNode* getDisabledImage();
+
+	static CButton* create();
+	static CButton* create(const char* pNormal, const char* pSelected = NULL, const char* pDisabled = NULL);
+	static CButton* createWith9Sprite(const CCSize& tSize, const char* pNormal, const char* pSelected = NULL, const char* pDisabled = NULL);
+};

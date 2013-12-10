@@ -1,0 +1,16 @@
+class CImageViewScale9 : public CScale9Sprite, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+	CImageViewScale9();
+	
+	static CImageViewScale9* create(const char* file, CCRect rect,  CCRect capInsets);
+	static CImageViewScale9* create(const char* file, CCRect rect);
+	static CImageViewScale9* create(CCRect capInsets, const char* file);
+	static CImageViewScale9* create(const char* file);
+	static CImageViewScale9* createWithSpriteFrame(CCSpriteFrame* spriteFrame, CCRect capInsets);
+	static CImageViewScale9* createWithSpriteFrame(CCSpriteFrame* spriteFrame); 
+	static CImageViewScale9* createWithSpriteFrameName(const char*spriteFrameName, CCRect capInsets);
+	static CImageViewScale9* createWithSpriteFrameName(const char*spriteFrameName);
+	static CImageViewScale9* createWithTexture(CCTexture2D* pTexture);
+	static CImageViewScale9* createWithTexture(CCTexture2D* pTexture, CCRect capInsets);
+	static CImageViewScale9* create();
+};

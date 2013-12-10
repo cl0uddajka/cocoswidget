@@ -1,0 +1,13 @@
+class CLabel : public CCLabelTTF, public CWidget, public CClickableProtocol, public CLongClickableProtocol
+{
+public:
+	CLabel();
+	virtual ~CLabel();
+	
+	static CLabel* create();
+	static CLabel* create(const char *pString, const char *pFontName, float fFontSize);
+	static CLabel* create(const char *pString, const char *pFontName, float fFontSize,
+		const CCSize& tDimensions, CCTextAlignment hAlignment);
+	static CLabel* create(const char *pString, const char *pFontName, float fFontSize,
+		const CCSize& tDimensions, CCTextAlignment hAlignment, CCVerticalTextAlignment vAlignment);
+};

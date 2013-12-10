@@ -1,0 +1,16 @@
+class CSlider : public CProgressBar, public CWidget
+{
+	CSlider();
+	virtual ~CSlider();
+
+	virtual bool initWithSlider(const char* pSlider, const char* pProgress);
+	virtual void setContentSize(const CCSize& tSize);
+
+	virtual void setSliderImage(const char* pFile);
+	virtual void setSliderTexture(CCTexture2D* pTexture);
+	virtual void setSliderSpriteFrame(CCSpriteFrame* pFrame);
+	virtual void setSliderSpriteFrameName(const char* pSpriteName);
+
+	static CSlider* create();
+	static CSlider* create(const char* pSlider, const char* pProgress);
+};
