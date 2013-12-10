@@ -291,7 +291,7 @@ extern "C" {
 }
 
 #include "lua_cocoswidget.h"
-#include "cocoswidget/cocos-widget.h"
+#include "../CocosWidget/cocos-widget.h"
 #include <map>
 #include <string>
 #include "cocos2d.h"
