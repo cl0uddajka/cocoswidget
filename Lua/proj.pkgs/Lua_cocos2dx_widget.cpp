@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Lua_cocos2dx_widget
-** Generated automatically by tolua++-1.0.92 on 12/10/13 19:18:40.
+** Generated automatically by tolua++-1.0.92 on 12/10/13 19:20:17.
 */
 
 /****************************************************************************
@@ -32,7 +32,7 @@ extern "C" {
 }
 
 #include "lua_cocoswidget.h"
-#include "cocoswidget/cocos-widget.h"
+#include "../CocosWidget/cocos-widget.h"
 #include <map>
 #include <string>
 #include "cocos2d.h"
