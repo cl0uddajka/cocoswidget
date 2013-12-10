@@ -43,7 +43,7 @@ CLabelAtlas::~CLabelAtlas()
 CLabelAtlas* CLabelAtlas::create(const char *pString, const char *charMapFile, unsigned int itemWidth, int unsigned itemHeight, unsigned int startCharMap)
 {
     CLabelAtlas *pRet = new CLabelAtlas();
-    if( pRet && pRet->initWithString(string, charMapFile, itemWidth, itemHeight, startCharMap) )
+    if( pRet && pRet->initWithString(pString, charMapFile, itemWidth, itemHeight, startCharMap) )
     {
         pRet->autorelease();
         return pRet;
@@ -55,7 +55,7 @@ CLabelAtlas* CLabelAtlas::create(const char *pString, const char *charMapFile, u
 CLabelAtlas* CLabelAtlas::create(const char *pString, const char *fntFile)
 {    
     CLabelAtlas *pRet = new CLabelAtlas();
-    if( pRet && pRet->initWithString(string, fntFile) )
+    if( pRet && pRet->initWithString(pString, fntFile) )
     {
 		pRet->autorelease();
         return pRet;

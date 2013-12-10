@@ -81,23 +81,23 @@ CLabelBMFont* CLabelBMFont::create()
 
 CLabelBMFont * CLabelBMFont::create(const char *pString, const char *fntFile, float width, CCTextAlignment alignment)
 {
-    return CLabelBMFont::create(str, fntFile, width, alignment, CCPointZero);
+    return CLabelBMFont::create(pString, fntFile, width, alignment, CCPointZero);
 }
 
 CLabelBMFont * CLabelBMFont::create(const char *pString, const char *fntFile, float width)
 {
-    return CLabelBMFont::create(str, fntFile, width, kCCTextAlignmentLeft, CCPointZero);
+    return CLabelBMFont::create(pString, fntFile, width, kCCTextAlignmentLeft, CCPointZero);
 }
 
 CLabelBMFont * CLabelBMFont::create(const char *pString, const char *fntFile)
 {
-    return CLabelBMFont::create(str, fntFile, kCCLabelAutomaticWidth, kCCTextAlignmentLeft, CCPointZero);
+    return CLabelBMFont::create(pString, fntFile, kCCLabelAutomaticWidth, kCCTextAlignmentLeft, CCPointZero);
 }
 
 CLabelBMFont *CLabelBMFont::create(const char *pString, const char *fntFile, float width/* = kCCLabelAutomaticWidth*/, CCTextAlignment alignment/* = kCCTextAlignmentLeft*/, CCPoint imageOffset/* = CCPointZero*/)
 {
     CLabelBMFont *pRet = new CLabelBMFont();
-    if(pRet && pRet->initWithString(str, fntFile, width, alignment, imageOffset))
+    if(pRet && pRet->initWithString(pString, fntFile, width, alignment, imageOffset))
     {
         pRet->autorelease();
         return pRet;
