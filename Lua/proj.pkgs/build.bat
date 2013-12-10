@@ -1,1 +1,1 @@
-tolua++ -L basic.lua -o "Lua_cocoswidget.cpp" Lua_cocoswidget.pkg
+tolua++ -L basic.lua -o "Lua_cocos2dx_widget.cpp" Lua_cocos2dx_widget.pkg
