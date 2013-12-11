@@ -336,8 +336,8 @@ unsigned int CTableView::cellBeginIndexFromOffset(const CCPoint& offset)
 	{
 	case eScrollViewDirectionHorizontal:
 		{
-			int xos = -offset.x;
-			int uIdx = xos / m_tCellsSize.width;
+			float xos = -offset.x;
+			int uIdx = (int)(xos / m_tCellsSize.width);
 
 			uIdx = MAX(uIdx, 0);
 			uIdx = MIN((int)m_uCellsCount - 1, uIdx);
@@ -346,9 +346,9 @@ unsigned int CTableView::cellBeginIndexFromOffset(const CCPoint& offset)
 		}
 	default:
 		{
-			int ofy = offset.y + m_pContainer->getContentSize().height;
-			int xos = ofy - m_obContentSize.height;
-			int uIdx = xos / m_tCellsSize.height;
+			float ofy = offset.y + m_pContainer->getContentSize().height;
+			float xos = ofy - m_obContentSize.height;
+			int uIdx = (int)(xos / m_tCellsSize.height);
 
 			uIdx = MAX(uIdx, 0);
 			uIdx = MIN((int)m_uCellsCount - 1, uIdx);
@@ -371,8 +371,8 @@ unsigned int CTableView::cellEndIndexFromOffset(const CCPoint& offset)
 	{
 	case eScrollViewDirectionHorizontal:
 		{
-			int xos = -(offset.x + -m_obContentSize.width);
-			int uIdx = xos / m_tCellsSize.width;
+			float xos = -(offset.x + -m_obContentSize.width);
+			int uIdx = (int)(xos / m_tCellsSize.width);
 
 			uIdx = MAX(uIdx, 0);
 			uIdx = MIN((int)m_uCellsCount - 1, uIdx);
@@ -381,8 +381,8 @@ unsigned int CTableView::cellEndIndexFromOffset(const CCPoint& offset)
 		}
 	default:
 		{
-			int ofy = offset.y + m_pContainer->getContentSize().height;
-			int uIdx = ofy / m_tCellsSize.height;
+			float ofy = offset.y + m_pContainer->getContentSize().height;
+			int uIdx = (int)(ofy / m_tCellsSize.height);
 
 			uIdx = MAX(uIdx, 0);
 			uIdx = MIN((int)m_uCellsCount - 1, uIdx);
