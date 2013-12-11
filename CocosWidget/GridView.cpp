@@ -225,9 +225,9 @@ void CGridView::updateCellAtIndex(unsigned int idx, unsigned int row)
 
 unsigned int CGridView::cellBeginRowFromOffset(const CCPoint& offset)
 {
-	int ofy = offset.y + m_pContainer->getContentSize().height;
-	int xos = ofy - m_obContentSize.height;
-	int row = xos / m_tCellsSize.height;
+	float ofy = offset.y + m_pContainer->getContentSize().height;
+	float xos = ofy - m_obContentSize.height;
+	int row = (int)(xos / m_tCellsSize.height);
 
 	row = MAX(row, 0);
 	row = MIN((int)m_uRows - 1, row);
@@ -237,8 +237,8 @@ unsigned int CGridView::cellBeginRowFromOffset(const CCPoint& offset)
 
 unsigned int CGridView::cellEndRowFromOffset(const CCPoint& offset)
 {
-	int ofy = offset.y + m_pContainer->getContentSize().height;
-	int row = ofy / m_tCellsSize.height;
+	float ofy = offset.y + m_pContainer->getContentSize().height;
+	int row = (int)(ofy / m_tCellsSize.height);
 
 	row = MAX(row, 0);
 	row = MIN((int)m_uRows - 1, row);
