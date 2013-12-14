@@ -138,6 +138,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClCompile Include="..\..\CocosWidget\LabelAtlas.cpp" />
     <ClCompile Include="..\..\CocosWidget\LabelBMFont.cpp" />
     <ClCompile Include="..\..\CocosWidget\ListView.cpp" />
+    <ClCompile Include="..\..\CocosWidget\Lua_cocos2dx_widget.cpp" />
     <ClCompile Include="..\..\CocosWidget\PageView.cpp" />
     <ClCompile Include="..\..\CocosWidget\Panel.cpp" />
     <ClCompile Include="..\..\CocosWidget\ProgressBar.cpp" />
@@ -180,6 +181,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\..\CocosWidget\LabelAtlas.h" />
     <ClInclude Include="..\..\CocosWidget\LabelBMFont.h" />
     <ClInclude Include="..\..\CocosWidget\ListView.h" />
+    <ClInclude Include="..\..\CocosWidget\Lua_cocos2dx_widget.h" />
     <ClInclude Include="..\..\CocosWidget\PageView.h" />
     <ClInclude Include="..\..\CocosWidget\Panel.h" />
     <ClInclude Include="..\..\CocosWidget\ProgressBar.h" />
