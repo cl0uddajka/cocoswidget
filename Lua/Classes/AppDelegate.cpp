@@ -7,6 +7,7 @@
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #include "Lua_web_socket.h"
 #endif
+#include "../../CocosWidget/Lua_cocos2dx_widget.h"
 
 using namespace CocosDenshion;
 
@@ -27,11 +28,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 
-    // turn on display FPS
     pDirector->setDisplayStats(true);
-
-    // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
+	CCEGLView::sharedOpenGLView()->setDesignResolutionSize(960, 640, kResolutionShowAll);
 
     // register lua engine
     CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
@@ -50,8 +49,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCFileUtils::sharedFileUtils()->addSearchPath("script");
 #endif
 
-    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("hello.lua");
+	CCFileUtils::sharedFileUtils()->addSearchPath("luaScript");
+
+	//cocoswidget lua binding open api
+	tolua_Lua_cocos2dx_widget_open(tolua_s);
+
+    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("main.lua");
     pEngine->executeScriptFile(path.c_str());
+	pEngine->executeGlobalFunction("main");
 
     return true;
 }
