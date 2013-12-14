@@ -25,6 +25,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "WidgetLayout.h"
+#if USING_LUA
+#include "CCLuaEngine.h"
+#endif
 using namespace std;
 
 NS_CC_WIDGET_BEGIN
@@ -43,13 +46,22 @@ CWidgetLayout::CWidgetLayout()
 , m_pTouchCancelledAfterLongClickHandler(NULL)
 , m_pLongClickedWidgetObject(NULL)
 , m_bMultiTouchEnabled(false)
+#if USING_LUA
+, m_nTouchMovedAfterLongClickScriptHandler(0)
+, m_nTouchEndedAfterLongClickScriptHandler(0)
+, m_pTouchCancelledAfterLongClickScriptHandler(0)
+#endif
 {
 
 }
 
 CWidgetLayout::~CWidgetLayout()
 {
-	
+#if USING_LUA
+	removeOnTouchMovedAfterLongClickScriptHandler();
+	removeOnTouchEndedAfterLongClickScriptHandler();
+	removeOnTouchCancelledAfterLongClickScriptHandler();
+#endif
 }
 
 int CWidgetLayout::getTouchPriority()
@@ -129,12 +141,73 @@ void CWidgetLayout::setOnTouchCancelledAfterLongClickListener(CCObject* pListene
     m_pTouchCancelledAfterLongClickHandler = pHandler;
 }
 
+#if USING_LUA
+void CWidgetLayout::setOnTouchMovedAfterLongClickScriptHandler(int nHandler)
+{
+	removeOnTouchMovedAfterLongClickScriptHandler();
+	m_nTouchMovedAfterLongClickScriptHandler = nHandler;
+}
+
+void CWidgetLayout::setOnTouchEndedAfterLongClickScriptHandler(int nHandler)
+{
+	removeOnTouchEndedAfterLongClickScriptHandler();
+	m_nTouchEndedAfterLongClickScriptHandler = nHandler;
+}
+
+void CWidgetLayout::setOnTouchCancelledAfterLongClickScriptHandler(int nHandler)
+{
+	removeOnTouchCancelledAfterLongClickScriptHandler();
+	m_pTouchCancelledAfterLongClickScriptHandler = nHandler;
+}
+
+void CWidgetLayout::removeOnTouchMovedAfterLongClickScriptHandler()
+{
+	if( m_nTouchMovedAfterLongClickScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchMovedAfterLongClickScriptHandler);
+		m_nTouchMovedAfterLongClickScriptHandler = 0;
+	}
+}
+
+void CWidgetLayout::removeOnTouchEndedAfterLongClickScriptHandler()
+{
+	if( m_nTouchEndedAfterLongClickScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchEndedAfterLongClickScriptHandler);
+		m_nTouchEndedAfterLongClickScriptHandler = 0;
+	}
+}
+
+void CWidgetLayout::removeOnTouchCancelledAfterLongClickScriptHandler()
+{
+	if( m_pTouchCancelledAfterLongClickScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_pTouchCancelledAfterLongClickScriptHandler);
+		m_pTouchCancelledAfterLongClickScriptHandler = 0;
+	}
+}
+#endif
+
 void CWidgetLayout::executeTouchMovedAfterLongClickHandler(CCObject* pSender, CCTouch *pTouch, float fDuration)
 {
     if( m_pTouchMovedAfterLongClickListener && m_pTouchMovedAfterLongClickHandler )
     {
         (m_pTouchMovedAfterLongClickListener->*m_pTouchMovedAfterLongClickHandler)(pSender, pTouch, fDuration);
     }
+#if USING_LUA
+	else if( m_nTouchMovedAfterLongClickScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(pSender, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+
+		int nRet = pStack->executeFunctionByHandler(m_nTouchMovedAfterLongClickScriptHandler, 3);
+		pStack->clean();
+	}
+#endif
 }
 
 void CWidgetLayout::executeTouchEndedAfterLongClickHandler(CCObject* pSender, CCTouch *pTouch, float fDuration)
@@ -143,6 +216,20 @@ void CWidgetLayout::executeTouchEndedAfterLongClickHandler(CCObject* pSender, CC
     {
 		(m_pTouchEndedAfterLongClickListener->*m_pTouchEndedAfterLongClickHandler)(pSender, pTouch, fDuration);
     }
+#if USING_LUA
+	else if( m_nTouchEndedAfterLongClickScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(pSender, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+
+		int nRet = pStack->executeFunctionByHandler(m_nTouchEndedAfterLongClickScriptHandler, 3);
+		pStack->clean();
+	}
+#endif
 }
 
 void CWidgetLayout::executeTouchCancelledAfterLongClickHandler(CCObject* pSender, CCTouch *pTouch, float fDuration)
@@ -151,6 +238,20 @@ void CWidgetLayout::executeTouchCancelledAfterLongClickHandler(CCObject* pSender
     {
 		(m_pTouchCancelledAfterLongClickListener->*m_pTouchCancelledAfterLongClickHandler)(pSender, pTouch, fDuration);
     }
+#if USING_LUA
+	else if( m_pTouchCancelledAfterLongClickScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(pSender, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+
+		int nRet = pStack->executeFunctionByHandler(m_pTouchCancelledAfterLongClickScriptHandler, 3);
+		pStack->clean();
+	}
+#endif
 }
 
 void CWidgetLayout::setTouchPriority(int nTouchPriority)

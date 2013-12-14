@@ -89,18 +89,28 @@ class CDataSourceAdapterProtocol
 {
 public:
 	CDataSourceAdapterProtocol();
+	virtual ~CDataSourceAdapterProtocol();
 	virtual void setDataSourceAdapter(CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
 
 protected:
 	CCObject* m_pDataSourceAdapterListener;
 	SEL_DataSoucreAdapterHandler m_pDataSourceAdapterHandler;
-	virtual CCObject* executeDataSourceAdapterHandler(CCObject* pConvertCell, unsigned int uIdx);
+	CCObject* executeDataSourceAdapterHandler(CCObject* pConvertCell, unsigned int uIdx);
+#if USING_LUA
+protected:
+	int m_nDataSourceAdapterScriptHandler;
+	CCObject* executeDataSourceAdapterScriptHandler(CCObject* pConvertCell, unsigned int uIdx);
+public:
+	virtual void setDataSourceAdapterScriptHandler(int nHandler);
+	virtual void removeDataSourceAdapterScriptHandler();
+#endif
 };
 
 class CPageChangeableProtocol
 {
 public:
 	CPageChangeableProtocol();
+	virtual ~CPageChangeableProtocol();
 	void setOnPageChangedListener(CCObject* pListener, SEL_PageChangedHandler pHandler);
 
 protected:
@@ -108,36 +118,63 @@ protected:
 	CCObject* m_pPageChangedListener;
 	SEL_PageChangedHandler m_pPageChangedHandler;
 	void executePageChangedHandler(CCObject* pSender, unsigned int uPageIdx);
+#if USING_LUA
+protected:
+	int m_nPageChangedScriptHandler;
+	void executePageChangedScriptHandler(CCObject* pSender, unsigned int uPageIdx);
+public:
+	virtual void setOnPageChangedScriptHandler(int nHandler);
+	virtual void removeOnPageChangedScriptHandler();
+#endif
 };
 
 class CScrollableProtocol
 {
 public:
 	CScrollableProtocol();
+	virtual ~CScrollableProtocol();
 	void setOnScrollingListener(CCObject* pListener, SEL_ScrollingHandler pHandler);
 
 protected:
 	CCObject* m_pScrollingListener;
 	SEL_ScrollingHandler m_pScrollingHandler;
 	void executeScrollingHandler(CCObject* pSender);
+#if USING_LUA
+protected:
+	int m_nScrollingScriptHandler;
+	void executeScrollingScriptHandler(CCObject* pSender);
+public:
+	virtual void setOnScrollingScriptHandler(int nHandler);
+	virtual void removeOnScrollingScriptHandler();
+#endif
 };
 
 class CProgressEndedProtocol
 {
 public:
 	CProgressEndedProtocol();
+	virtual ~CProgressEndedProtocol();
 	void setOnProgressEndedListener(CCObject* pListener, SEL_ProgressEndedHandler pHandler);
 
 protected:
 	CCObject* m_pProgressEndedListener;
 	SEL_ProgressEndedHandler m_pProgressEndedHandler;
 	void executeProgressEndedHandler(CCObject* pSender);
+#if USING_LUA
+protected:
+	int m_nProgressEndedScriptHandler;
+	void executeProgressEndedScriptHandler(CCObject* pSender);
+public:
+	virtual void setOnProgressEndedScriptHandler(int nHandler);
+	virtual void removeOnProgressEndedScriptHandler();
+#endif
 };
 
 class CValueChangeableProtocol
 {
 public:
 	CValueChangeableProtocol();
+	virtual ~CValueChangeableProtocol();
 	void setOnValueChangedListener(CCObject* pListener, SEL_ValueChangedHandler pHandler);
 
 protected:
@@ -145,24 +182,42 @@ protected:
 	CCObject* m_pValueChangedListener;
 	SEL_ValueChangedHandler m_pValueChangedHandler;
 	void executeValueChangedHandler(CCObject* pSender, int nValue);
+#if USING_LUA
+protected:
+	int m_nValueChangedScriptHandler;
+	void executeValueChangedScriptHandler(CCObject* pSender, int nValue);
+public:
+	virtual void setOnValueChangedScriptHandler(int nHandler);
+	virtual void removeOnValueChangedScriptHandler();
+#endif
 };
 
 class CClickableProtocol
 {
 public:
 	CClickableProtocol();
+	virtual ~CClickableProtocol();
 	void setOnClickListener(CCObject* pListener, SEL_ClickHandler pHandler);
 
 protected:
 	CCObject* m_pClickListener;
 	SEL_ClickHandler m_pClickHandler;
 	void executeClickHandler(CCObject* pSender);
+#if USING_LUA
+protected:
+	int m_nClickScriptHandler;
+	void executeClickScriptHandler(CCObject* pSender);
+public:
+	virtual void setOnClickScriptHandler(int nHandler);
+	virtual void removeOnClickScriptHandler();
+#endif
 };
 
 class CLongClickableProtocol
 {
 public:
 	CLongClickableProtocol();
+	virtual ~CLongClickableProtocol();
 	void setOnLongClickListener(CCObject* pListener, SEL_LongClickHandler pHandler);
 
 protected:
@@ -177,12 +232,21 @@ protected:
 
 	float m_fLongClickLastTouchDuration;
 	CCTouch* m_pLongClickLastTouch;
+#if USING_LUA
+protected:
+	int m_nLongClickScriptHandler;
+	bool executeLongClickScriptHandler(CCObject* pSender, CCTouch* pTouch);
+public:
+	virtual void setOnLongClickScriptHandler(int nHandler);
+	virtual void removeOnLongClickScriptHandler();
+#endif
 };
 
 class CCheckableProtocol
 {
 public:
 	CCheckableProtocol();
+	virtual ~CCheckableProtocol();
 	virtual void setChecked(bool bChecked);
 	bool isChecked() const;
 	virtual void setExclusion(int nExclusion);
@@ -196,21 +260,37 @@ protected:
 protected:
 	bool m_bChecked;
 	int  m_nExclusion;
-
 	CCObject* m_pCheckListener;
 	SEL_CheckHandler m_pCheckHandler;
+#if USING_LUA
+protected:
+	int m_nCheckScriptHandler;
+	void executeCheckScriptHandler(CCObject* pSender, bool bChecked);
+public:
+	virtual void setOnCheckScriptHandler(int nHandler);
+	virtual void removeCheckScriptHandler();
+#endif
 };
 
 class CControlableProtocol
 {
 public:
 	CControlableProtocol();
+	virtual ~CControlableProtocol();
 	void setOnControlListener(CCObject* pListener, SEL_ControlHandler pHandler);
 
 protected:
 	CCObject* m_pControlListener;
 	SEL_ControlHandler m_pControlHandler;
 	void executeControlHandler(CCObject* pSender, float cx, float cy);
+#if USING_LUA
+protected:
+	int m_nControlScriptHandler;
+	void executeControlScriptHandler(CCObject* pSender, float cx, float cy);
+public:
+	virtual void setOnControlScriptHandler(int nHandler);
+	virtual void removeOnControlScriptHandler();
+#endif
 };
 
 #ifndef CC_WIDGET_LONGCLICK_SCHEDULE

@@ -339,7 +339,13 @@ CGridViewCell* CGridView::dequeueCell()
 
 void CGridView::reloadData()
 {
+#if USING_LUA
+	CCAssert(
+		(m_nDataSourceAdapterScriptHandler != 0) || 
+		(m_pDataSourceAdapterListener && m_pDataSourceAdapterHandler), "reloadData");
+#else
 	CCAssert(m_pDataSourceAdapterListener && m_pDataSourceAdapterHandler, "reloadData");
+#endif
 	CCAssert((int)m_tCellsSize.width != 0 && (int)m_tCellsSize.height != 0, "reloadData");
     CCAssert(m_eDirection == eScrollViewDirectionVertical, "reloadData");
 	CCAssert(m_uColumns != 0, "reloadData");

@@ -117,6 +117,23 @@ protected:
     SEL_TouchEventHandler m_pTouchMovedHandler;
     SEL_TouchEventHandler m_pTouchEndedHandler;
     SEL_TouchEventHandler m_pTouchCancelledHandler;
+
+#if USING_LUA
+protected:
+	int m_nTouchBeganScriptHandler;
+	int m_nTouchMovedScriptHandler;
+	int m_nTouchEndedScriptHandler;
+	int m_nTouchCancelledScriptHandler;
+public:
+	virtual void setOnTouchBeganScriptHandler(int nHandler);
+	virtual void setOnTouchMovedScriptHandler(int nHandler);
+	virtual void setOnTouchEndedScriptHandler(int nHandler);
+	virtual void setOnTouchCancelledScriptHandler(int nHandler);
+	virtual void removeOnTouchBeganScriptHandler();
+	virtual void removeOnTouchMovedScriptHandler();
+	virtual void removeOnTouchEndedScriptHandler();
+	virtual void removeOnTouchCancelledScriptHandler();
+#endif
 };
 
 

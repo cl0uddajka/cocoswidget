@@ -133,6 +133,20 @@ protected:
     SEL_AfterLongClickHandler m_pTouchEndedAfterLongClickHandler;
     SEL_AfterLongClickHandler m_pTouchCancelledAfterLongClickHandler;
 
+#if USING_LUA
+protected:
+	int m_nTouchMovedAfterLongClickScriptHandler;
+	int m_nTouchEndedAfterLongClickScriptHandler;
+	int m_pTouchCancelledAfterLongClickScriptHandler;
+public:
+	void setOnTouchMovedAfterLongClickScriptHandler(int nHandler);
+	void setOnTouchEndedAfterLongClickScriptHandler(int nHandler);
+	void setOnTouchCancelledAfterLongClickScriptHandler(int nHandler);
+	void removeOnTouchMovedAfterLongClickScriptHandler();
+	void removeOnTouchEndedAfterLongClickScriptHandler();
+	void removeOnTouchCancelledAfterLongClickScriptHandler();
+#endif
+
 };
 
 NS_CC_WIDGET_END

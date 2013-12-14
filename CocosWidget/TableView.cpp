@@ -133,7 +133,13 @@ void CTableView::setAutoRelocateSpeed(float fSpeed)
 
 void CTableView::reloadData()
 {
+#if USING_LUA
+	CCAssert(
+		(m_nDataSourceAdapterScriptHandler != 0) ||
+		(m_pDataSourceAdapterListener && m_pDataSourceAdapterHandler), "reloadData");
+#else
 	CCAssert(m_pDataSourceAdapterListener && m_pDataSourceAdapterHandler, "reloadData");
+#endif
 	CCAssert((int)m_tCellsSize.width != 0 && (int)m_tCellsSize.height != 0, "reloadData");
     CCAssert(m_eDirection != eScrollViewDirectionBoth, "reloadData");
 

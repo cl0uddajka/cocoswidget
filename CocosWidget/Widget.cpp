@@ -26,6 +26,9 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "Widget.h"
 #include "WidgetLayout.h"
+#if USING_LUA
+#include "CCLuaEngine.h"
+#endif
 
 NS_CC_WIDGET_BEGIN
 
@@ -45,13 +48,24 @@ CWidget::CWidget()
 , m_pTouchCancelledHandler(NULL)
 , m_bTouchInterrupt(false)
 , m_nUserTag(kCCNodeTagInvalid)
+#if USING_LUA
+, m_nTouchBeganScriptHandler(0)
+, m_nTouchMovedScriptHandler(0)
+, m_nTouchEndedScriptHandler(0)
+, m_nTouchCancelledScriptHandler(0)
+#endif
 {
 	
 }
 
 CWidget::~CWidget()
 {
-	
+#if USING_LUA
+	removeOnTouchBeganScriptHandler();
+	removeOnTouchMovedScriptHandler();
+	removeOnTouchEndedScriptHandler();
+	removeOnTouchCancelledScriptHandler();
+#endif
 }
 
 void CWidget::setThisObject(CCObject* pThis)
@@ -116,7 +130,37 @@ CWidgetTouchModel CWidget::executeTouchBeganHandler(CCTouch* pTouch)
 			return eUserTouchModel;
 		}
     }
+#if USING_LUA
+	else if( m_nTouchBeganScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
 
+		pStack->pushCCObject(m_pThisObject, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		
+		CCArray* pRetArray = new CCArray();
+		pRetArray->initWithCapacity(1);
+
+		int nRet = pStack->executeFunctionReturnArray(m_nTouchBeganScriptHandler, 2, 1, pRetArray);
+		CCAssert(pRetArray->count() > 0, "return count = 0");
+
+		CCDouble* pIntModel = (CCDouble*) pRetArray->objectAtIndex(0);
+		CWidgetTouchModel eUserTouchModel = (CWidgetTouchModel) ( (int)pIntModel->getValue() );
+		delete pRetArray;
+		pStack->clean();
+
+		if( eUserTouchModel == eWidgetTouchNone )
+		{
+			return eWidgetTouchNone;
+		}
+		else
+		{
+			this->onTouchBegan(pTouch);
+			return eUserTouchModel;
+		}
+	}
+#endif
     return this->onTouchBegan(pTouch);
 }
 
@@ -129,7 +173,35 @@ void CWidget::executeTouchMovedHandler(CCTouch* pTouch, float fDuration)
             return;
         }
     }
-    return this->onTouchMoved(pTouch, fDuration);
+#if USING_LUA
+	else if( m_nTouchMovedScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(m_pThisObject, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+		
+		CCArray* pRetArray = new CCArray();
+		pRetArray->initWithCapacity(1);
+
+		int nRet = pStack->executeFunctionReturnArray(m_nTouchMovedScriptHandler, 3, 1, pRetArray);
+		CCAssert(pRetArray->count() > 0, "return count = 0");
+
+		CCBool* pBool = (CCBool*) pRetArray->objectAtIndex(0);
+		bool bContinue = pBool->getValue();
+		delete pRetArray;
+		pStack->clean();
+
+		if(!bContinue)
+		{
+			return;
+		}
+	}
+#endif
+	this->onTouchMoved(pTouch, fDuration);
+    return;
 }
 
 void CWidget::executeTouchEndedHandler(CCTouch* pTouch, float fDuration)
@@ -141,7 +213,35 @@ void CWidget::executeTouchEndedHandler(CCTouch* pTouch, float fDuration)
             return;
         }
     }
-    return this->onTouchEnded(pTouch, fDuration);
+#if USING_LUA
+	else if( m_nTouchEndedScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(m_pThisObject, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+		
+		CCArray* pRetArray = new CCArray();
+		pRetArray->initWithCapacity(1);
+
+		int nRet = pStack->executeFunctionReturnArray(m_nTouchEndedScriptHandler, 3, 1, pRetArray);
+		CCAssert(pRetArray->count() > 0, "return count = 0");
+
+		CCBool* pBool = (CCBool*) pRetArray->objectAtIndex(0);
+		bool bContinue = pBool->getValue();
+		delete pRetArray;
+		pStack->clean();
+
+		if(!bContinue)
+		{
+			return;
+		}
+	}
+#endif
+	this->onTouchEnded(pTouch, fDuration);
+    return;
 }
 
 void CWidget::executeTouchCancelledHandler(CCTouch* pTouch, float fDuration)
@@ -153,7 +253,35 @@ void CWidget::executeTouchCancelledHandler(CCTouch* pTouch, float fDuration)
             return;
         }
     }
-    return this->onTouchCancelled(pTouch, fDuration);
+#if USING_LUA
+	else if( m_nTouchCancelledScriptHandler != 0 )
+	{
+		CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
+		CCLuaStack* pStack = pEngine->getLuaStack();
+
+		pStack->pushCCObject(m_pThisObject, "CCObject");
+		pStack->pushCCObject(pTouch, "CCTouch");
+		pStack->pushFloat(fDuration);
+		
+		CCArray* pRetArray = new CCArray();
+		pRetArray->initWithCapacity(1);
+
+		int nRet = pStack->executeFunctionReturnArray(m_nTouchCancelledScriptHandler, 3, 1, pRetArray);
+		CCAssert(pRetArray->count() > 0, "return count = 0");
+
+		CCBool* pBool = (CCBool*) pRetArray->objectAtIndex(0);
+		bool bContinue = pBool->getValue();
+		delete pRetArray;
+		pStack->clean();
+
+		if(!bContinue)
+		{
+			return;
+		}
+	}
+#endif
+	this->onTouchCancelled(pTouch, fDuration);
+    return;
 }
 
 void CWidget::setOnTouchBeganListener(CCObject* pListener, SEL_TouchBeganHandler pHandler)
@@ -179,6 +307,68 @@ void CWidget::setOnTouchCancelledListener(CCObject* pListener, SEL_TouchEventHan
 	m_pTouchCancelledListener = pListener;
     m_pTouchCancelledHandler = pHandler;
 }
+
+#if USING_LUA
+void CWidget::setOnTouchBeganScriptHandler(int nHandler)
+{
+	removeOnTouchBeganScriptHandler();
+	m_nTouchBeganScriptHandler = nHandler;
+}
+
+void CWidget::setOnTouchMovedScriptHandler(int nHandler)
+{
+	removeOnTouchMovedScriptHandler();
+	m_nTouchMovedScriptHandler = nHandler;
+}
+
+void CWidget::setOnTouchEndedScriptHandler(int nHandler)
+{
+	removeOnTouchEndedScriptHandler();
+	m_nTouchEndedScriptHandler = nHandler;
+}
+
+void CWidget::setOnTouchCancelledScriptHandler(int nHandler)
+{
+	removeOnTouchCancelledScriptHandler();
+	m_nTouchCancelledScriptHandler = nHandler;
+}
+
+void CWidget::removeOnTouchBeganScriptHandler()
+{
+	if( m_nTouchBeganScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchBeganScriptHandler);
+		m_nTouchBeganScriptHandler = 0;
+	}
+}
+
+void CWidget::removeOnTouchMovedScriptHandler()
+{
+	if( m_nTouchMovedScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchMovedScriptHandler);
+		m_nTouchMovedScriptHandler = 0;
+	}
+}
+
+void CWidget::removeOnTouchEndedScriptHandler()
+{
+	if( m_nTouchEndedScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchEndedScriptHandler);
+		m_nTouchEndedScriptHandler = 0;
+	}
+}
+
+void CWidget::removeOnTouchCancelledScriptHandler()
+{
+	if( m_nTouchCancelledScriptHandler != 0 )
+	{
+		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_nTouchCancelledScriptHandler);
+		m_nTouchCancelledScriptHandler = 0;
+	}
+}
+#endif
 
 void CWidget::interruptTouch(CCTouch* pTouch, float fDuration)
 {

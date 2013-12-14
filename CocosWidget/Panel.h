@@ -56,13 +56,13 @@ public:
 	// 当设置大小时，更新内容坐标
 	virtual void setContentSize(const CCSize& tContentSize);
 
-    virtual CWidgetTouchModel executeTouchBegan(CCTouch *pTouch);
     virtual CWidgetTouchModel onTouchBegan(CCTouch *pTouch);
     virtual void onTouchMoved(CCTouch *pTouch, float fDuration);
     virtual void onTouchEnded(CCTouch *pTouch, float fDuration);
     virtual void onTouchCancelled(CCTouch *pTouch, float fDuration);
 
 	static CPanel* create();
+	static CPanel* create(const CCSize& tContentSize);
 
 	CC_WIDGET_BACKGROUND;
     

@@ -53,6 +53,19 @@ CPanel* CPanel::create()
 	return NULL;
 }
 
+CPanel* CPanel::create(const CCSize& tContentSize)
+{
+	CPanel* pRet = new CPanel();
+	if( pRet && pRet->init() )
+	{
+		pRet->setContentSize(tContentSize);
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SAFE_DELETE(pRet);
+	return NULL;
+}
+
 bool CPanel::init()
 {
 	setContentSize(CCDirector::sharedDirector()->getWinSize());
@@ -67,15 +80,11 @@ void CPanel::setContentSize(const CCSize& tContentSize)
 	CC_WIDGET_UPDATE_BACKGROUND_POS;
 }
 
-CWidgetTouchModel CPanel::executeTouchBegan(CCTouch *pTouch)
+CWidgetTouchModel CPanel::onTouchBegan(CCTouch *pTouch)
 {
 	m_pSelectedWidget = NULL;
 	m_eChildTouchModel = eWidgetTouchNone;
-	return CWidget::executeTouchBeganHandler(pTouch);
-}
 
-CWidgetTouchModel CPanel::onTouchBegan(CCTouch *pTouch)
-{
 	CCPoint tNodePoint = convertToNodeSpace(pTouch->getLocation());
 	if( m_pChildren && m_pChildren->count() > 0 )
 	{
@@ -104,18 +113,6 @@ CWidgetTouchModel CPanel::onTouchBegan(CCTouch *pTouch)
 		}
 	}
 	return eWidgetTouchTransient;
-
-	/*m_pSelectedWidget = collisionWithWidget(tNodePoint);
-	if( m_pSelectedWidget )
-	{
-		m_eChildTouchModel = m_pSelectedWidget->executeTouchBeganHandler(pTouch);
-		if( m_eChildTouchModel == eWidgetTouchNone )
-		{
-			m_pSelectedWidget = NULL;
-		}
-		return m_eChildTouchModel;
-	}
-	return eWidgetTouchTransient;*/
 }
 
 void CPanel::onTouchMoved(CCTouch *pTouch, float fDuration)
@@ -132,6 +129,8 @@ void CPanel::onTouchEnded(CCTouch *pTouch, float fDuration)
 	{
 		m_pSelectedWidget->executeTouchEndedHandler(pTouch, fDuration);
 	}
+	m_pSelectedWidget = NULL;
+	m_eChildTouchModel = eWidgetTouchNone;
 }
 
 void CPanel::onTouchCancelled(CCTouch *pTouch, float fDuration)
@@ -140,6 +139,8 @@ void CPanel::onTouchCancelled(CCTouch *pTouch, float fDuration)
 	{
 		m_pSelectedWidget->executeTouchCancelledHandler(pTouch, fDuration);
 	}
+	m_pSelectedWidget = NULL;
+	m_eChildTouchModel = eWidgetTouchNone;
 }
 
 
