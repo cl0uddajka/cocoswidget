@@ -26,7 +26,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
     eglView->setViewName("CocosWidgetTestLua");
-    eglView->setFrameSize(480, 320);
+    eglView->setFrameSize(960, 640);
 
     int ret = CCApplication::sharedApplication()->run();
 
