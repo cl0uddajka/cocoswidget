@@ -1,7 +1,8 @@
 ﻿#ifndef __MENUSCENE_H__
 #define __MENUSCENE_H__
 
-#include "../CocosWidget/cocos-widget.h"
+#include "cocos2d.h"
+#include "../../CocosWidget/cocos-widget.h"
 using namespace cocos2d;
 using namespace cocos2d::cocoswidget;
 #include <vector>

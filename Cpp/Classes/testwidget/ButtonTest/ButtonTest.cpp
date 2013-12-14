@@ -292,7 +292,7 @@ bool CButtonAttributeTest::init()
 bool CButton9SpriteTest::init()
 {
 	CButtonTestSceneBase::init();
-	setTitle("CButtonAttributeTest");
+	setTitle("CButton9SpriteTest");
 	setDescription("9PatchSprite by create");
 
 	CButton* pButton = CButton::createWith9Sprite(CCSize(196, 68),"sprite9_btn1.png", "sprite9_btn2.png");

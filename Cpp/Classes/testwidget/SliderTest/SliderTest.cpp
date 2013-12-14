@@ -56,7 +56,7 @@ void CSliderBasicTest::onValueChanged(CCObject* pSender, int nValue)
 bool CSliderWithScrollTest::init()
 {
 	CSliderTestSceneBase::init();
-	setTitle("CSliderBasicTest");
+	setTitle("CSliderWithScrollTest");
 	setDescription("Slider With ScrollView");
 
 	m_pScrollView = CScrollView::create(CCSize(480, 320));

@@ -40,7 +40,7 @@ bool CControlViewBasicTest::init()
 	CControlView* pView2 = CControlView::create();
 	pView2->setBaseBoardImage("control_baseboard.png");
 	pView2->setPosition(CCPoint(860, 100));
-	pView2->setRadius(pView->getContentSize().width / 2);
+	pView2->setRadius(pView2->getContentSize().width / 2);
 	pView2->setOnControlListener(this, ccw_control_selector(CControlViewBasicTest::onTouched));
 	pView2->setAnchorPoint(CCPoint(1, 0));
 	pView2->setScale(1.5f);

@@ -21,7 +21,7 @@ bool CGridPageViewBasicTest::init()
 {
 	CGridPageViewTestSceneBase::init();
 	setTitle("CGridPageViewBasicTest");
-	setDescription("TableGrid basic test");
+	setDescription("GridPageView basic test");
 
 	CCSprite* pBg = CCSprite::create("background2.png");
 	pBg->setPosition(CCPoint(480, 320));

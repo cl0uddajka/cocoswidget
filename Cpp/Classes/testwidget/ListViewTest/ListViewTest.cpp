@@ -86,7 +86,7 @@ void CListViewBasicTest::onClick(CCObject* pSender)
 bool CListViewOperateTest::init()
 {
 	CListViewTestSceneBase::init();
-	setTitle("CListViewBasicTest");
+	setTitle("CListViewOperateTest");
 	setDescription("Add or Remove operate");
 
 	m_pListView = CListView::create(CCSize(480, 320));

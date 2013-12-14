@@ -56,7 +56,7 @@ void CToggleViewBasicTest::onClick(CCObject* pSender)
 bool CToggleViewGroupTest::init()
 {
 	CToggleViewTestSceneBase::init();
-	setTitle("CToggleViewBasicTest");
+	setTitle("CToggleViewGroupTest");
 	setDescription("Toggle button in group");
 
 	CToggleView* pToggle1 = CToggleView::create("toggle1_2.png", "toggle1_1.png");

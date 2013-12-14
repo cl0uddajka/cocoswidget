@@ -25,7 +25,7 @@ bool CPanelBasicTest::init()
 
 	CPanel* pPanel = CPanel::create();
 	pPanel->setPosition(CCPoint(480 ,320));
-	pPanel->setContentSize(CCPoint(480, 320));
+	pPanel->setContentSize(CCSize(480, 320));
 	pPanel->setBackgroundImage("background.png");
 	m_pLayout->addChild(pPanel);
 
@@ -50,7 +50,7 @@ bool CPanelColorTest::init()
 
 	CPanelColor* pPanel = CPanelColor::create(ccc4(255, 0, 0, 255));
 	pPanel->setPosition(CCPoint(480 ,320));
-	pPanel->setContentSize(CCPoint(480, 320));
+	pPanel->setContentSize(CCSize(480, 320));
 	m_pLayout->addChild(pPanel);
 
 	return true;
