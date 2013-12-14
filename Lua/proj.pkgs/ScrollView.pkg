@@ -47,4 +47,7 @@ class CScrollView : public CPanel, public CScrollableProtocol
 	void setContentOffset(CCPoint tOffset);
 	void setContentOffsetInDuration(CCPoint tOffset, float fDuration);
 	void setContentOffsetEaseIn(CCPoint tOffset, float fDuration, float fRate);
+	
+	virtual void setOnScrollingScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnScrollingScriptHandler();
 };

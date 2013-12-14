@@ -17,8 +17,6 @@ class CGridPageView : public CTableView, public CPageChangeableProtocol
 	virtual ~CGridPageView();
 
 	static CGridPageView* create(const CCSize& tViewSize);
-	static CGridPageView* create(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount, 
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
 
 	void setCountOfCell(unsigned int uCellsCount);
     unsigned int getCountOfCell() const;
@@ -29,4 +27,7 @@ class CGridPageView : public CTableView, public CPageChangeableProtocol
 	void setColumns(unsigned int uColumns);
 	unsigned int getColumns() const;
 	void reloadData();
+	
+	virtual void setOnPageChangedScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnPageChangedScriptHandler();
 };

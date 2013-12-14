@@ -203,6 +203,27 @@ local CCObjectTypes = {
     "CCScrollView",
     "CCTableViewCell",
     "CCTableView",
+	"CScale9Sprite",
+	"CControlView",
+	"CButton",
+	"CCheckBox",
+	"CGridPageView",
+	"CGridView",
+	"CImageView",
+	"CImageViewScale9",
+	"CLabel",
+	"CLabelAtlas",
+	"CLabelBMFont",
+	"CListView",
+	"CPageView",
+	"CPanel",
+	"CPanelColor",
+	"CProgressBar",
+	"CScrollView",
+	"CSlider",
+	"CTableView",
+	"CToggleView",
+	"CWidgetLayout"
 }
 
 -- register CCObject types
@@ -285,13 +306,15 @@ function post_output_hook(package)
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+#include "WidgetMacros.h"
 
+#if USING_LUA
 extern "C" {
 #include "tolua_fix.h"
 }
 
 #include "lua_cocos2dx_widget.h"
-#include "../CocosWidget/cocos-widget.h"
+#include "cocos-widget.h"
 #include <map>
 #include <string>
 #include "cocos2d.h"
@@ -320,6 +343,9 @@ TOLUA_API int  tolua_Cocos2d_open (lua_State* tolua_S);]], [[]])
     toluafix_pushusertype_ccobject(tolua_S, nID, pLuaID, (void*)tolua_ret]])
 
       replace('\t', '    ')
+	  
+	  
 
     WRITE(result)
+	WRITE("#endif //USING_LUA");
 end

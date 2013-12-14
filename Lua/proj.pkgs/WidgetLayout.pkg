@@ -1,3 +1,10 @@
+enum CWidgetTouchModel
+{
+	eWidgetTouchNone,
+	eWidgetTouchTransient,
+	eWidgetTouchSustained,
+};
+
 class CWidgetLayout : public CCNodeRGBA, public CCTouchDelegate
 {
 	CWidgetLayout();
@@ -13,4 +20,11 @@ class CWidgetLayout : public CCNodeRGBA, public CCTouchDelegate
 	void setMultiTouchEnabled(bool bEnabled);
 
 	static CWidgetLayout* create();
+	
+	void setOnTouchMovedAfterLongClickScriptHandler(LUA_FUNCTION nHandler);
+	void setOnTouchEndedAfterLongClickScriptHandler(LUA_FUNCTION nHandler);
+	void setOnTouchCancelledAfterLongClickScriptHandler(LUA_FUNCTION nHandler);
+	void removeOnTouchMovedAfterLongClickScriptHandler();
+	void removeOnTouchEndedAfterLongClickScriptHandler();
+	void removeOnTouchCancelledAfterLongClickScriptHandler();
 };

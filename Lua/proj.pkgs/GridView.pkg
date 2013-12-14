@@ -30,9 +30,7 @@ class CGridView : public CScrollView, public CDataSourceAdapterProtocol
 	void reloadData();
 
 	static CGridView* create(const CCSize& tViewSize);
-	static CGridView* create(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount,
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
-
-	bool initWithParams(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount,
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
+	
+	virtual void setDataSourceAdapterScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeDataSourceAdapterScriptHandler();
 };

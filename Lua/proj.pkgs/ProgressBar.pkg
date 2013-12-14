@@ -44,4 +44,9 @@ class CProgressBar : public CCNodeRGBA, public CProgressEndedProtocol, public CV
 	void setBackgroundSpriteFrameName(const char* pFrameName);
 	CCSprite* getBackgroundImage() const;
 	void removeBackgroundImage();
+	
+	virtual void setOnValueChangedScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnValueChangedScriptHandler();
+	virtual void setOnProgressEndedScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnProgressEndedScriptHandler();
 };

@@ -7,6 +7,7 @@ class CPageView : public CTableView, public CPageChangeableProtocol
 {
 	CPageView();
 	static CPageView* create(const CCSize& tPageSize);
-	static CPageView* create(const CCSize& tPageSize, unsigned int uPageCount,
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
+	
+	virtual void setOnPageChangedScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnPageChangedScriptHandler();
 };

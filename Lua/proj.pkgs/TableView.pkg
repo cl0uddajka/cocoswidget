@@ -27,11 +27,9 @@ class CTableView : public CScrollView, public CDataSourceAdapterProtocol
 	CTableViewCell* cellAtIndex(unsigned int idx);
     CTableViewCell* dequeueCell();
 	void reloadData();
-
-	bool initWithParams(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount, 
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
 		
     static CTableView* create(const CCSize& tViewSize);
-	static CTableView* create(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount, 
-		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
+		
+	virtual void setDataSourceAdapterScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeDataSourceAdapterScriptHandler();
 };
