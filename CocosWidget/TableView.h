@@ -1,4 +1,4 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 Copyright (c) 2013 viva-Lijunlin
 
 Created by Li JunLin on 2013
@@ -50,7 +50,7 @@ class CTableViewCell;
  * class    : CTableViewCell
  * author   : viva - Lijunlin
  * email    : csdn_viva@foxmail.com
- * function : ÁĞ±í¿Ø¼şµ¥Ôª¸ñ
+ * function : åˆ—è¡¨æ§ä»¶å•å…ƒæ ¼
  */
 class CTableViewCell : public CPanel
 {
@@ -58,15 +58,15 @@ public:
     CTableViewCell();
     virtual ~CTableViewCell();
 
-	// »ñÈ¡µ¥Ôª¸ñÏÂ±ê
+	// è·å–å•å…ƒæ ¼ä¸‹æ ‡
     unsigned int getIdx() { return m_uIdx; }
-	// ÉèÖÃµ¥Ôª¸ñÏÂ±ê
+	// è®¾ç½®å•å…ƒæ ¼ä¸‹æ ‡
     void setIdx(unsigned int uIdx) { m_uIdx = uIdx; }
-	// µ¥Ôª¸ñ±»¼ÓÈë¿ÕÏĞ×´Ì¬×éÊ±£¬Çå¿Õ×´Ì¬
+	// å•å…ƒæ ¼è¢«åŠ å…¥ç©ºé—²çŠ¶æ€ç»„æ—¶ï¼Œæ¸…ç©ºçŠ¶æ€
     virtual void reset(){ m_uIdx = CC_INVALID_INDEX; }
     
 protected:
-	// µ¥Ôª¸ñÏÂ±ê
+	// å•å…ƒæ ¼ä¸‹æ ‡
     unsigned int m_uIdx;
 };
 
@@ -74,7 +74,7 @@ protected:
  * class    : CTableView
  * author   : viva - Lijunlin
  * email    : csdn_viva@foxmail.com
- * function : ÁĞ±í¿Ø¼ş
+ * function : åˆ—è¡¨æ§ä»¶
  */
 class CTableView : public CScrollView, public CDataSourceAdapterProtocol
 {
@@ -82,34 +82,34 @@ public:
     CTableView();
     virtual ~CTableView();
 
-	// ÉèÖÃµ¥Ôª¸ñÊıÁ¿
+	// è®¾ç½®å•å…ƒæ ¼æ•°é‡
     void setCountOfCell(unsigned int uCellsCount);
-	// »ñÈ¡µ¥Ôª¸ñÊıÁ¿
+	// è·å–å•å…ƒæ ¼æ•°é‡
     unsigned int getCountOfCell() const;
-	// ÉèÖÃµ¥Ôª¸ñ´óĞ¡
+	// è®¾ç½®å•å…ƒæ ¼å¤§å°
     void setSizeOfCell(const CCSize& tCellsSize);
-	// »ñÈ¡µ¥Ôª¸ñ´óĞ¡
+	// è·å–å•å…ƒæ ¼å¤§å°
     const CCSize& getSizeOfCell() const;
-	// ÊÇ·ñ×Ô¶¯¶ÔÆëµ¥Ôª¸ñ
+	// æ˜¯å¦è‡ªåŠ¨å¯¹é½å•å…ƒæ ¼
 	bool isAutoRelocate() const;
-	// ÉèÖÃ×Ô¶¯¶ÔÆëµ¥Ôª¸ñ
+	// è®¾ç½®è‡ªåŠ¨å¯¹é½å•å…ƒæ ¼
 	void setAutoRelocate(bool bAuto);
 
-	// »ñÈ¡×Ô¶¯¶ÔÆëµ½µ¥Ôª¸ñÊ±µÄËÙ¶È
+	// è·å–è‡ªåŠ¨å¯¹é½åˆ°å•å…ƒæ ¼æ—¶çš„é€Ÿåº¦
 	float getAutoRelocateSpeed() const;
-	// ÉèÖÃ×Ô¶¯¶ÔÆëµ½µ¥Ôª¸ñÊ±µÄËÙ¶È
+	// è®¾ç½®è‡ªåŠ¨å¯¹é½åˆ°å•å…ƒæ ¼æ—¶çš„é€Ÿåº¦
 	void setAutoRelocateSpeed(float fSpeed);
 
-	// »ñÈ¡ËùÓĞÕıÔÚÊ¹ÓÃµÄµ¥Ôª¸ñ
+	// è·å–æ‰€æœ‰æ­£åœ¨ä½¿ç”¨çš„å•å…ƒæ ¼
 	CCArray* getCells();
-	// Í¨¹ıÏÂ±ê»ñÈ¡µ¥Ôª¸ñ
+	// é€šè¿‡ä¸‹æ ‡è·å–å•å…ƒæ ¼
 	CTableViewCell* cellAtIndex(unsigned int idx);
-	// µ¯³öÒ»¸ö¿ÕÏĞµÄµ¥Ôª¸ñ
+	// å¼¹å‡ºä¸€ä¸ªç©ºé—²çš„å•å…ƒæ ¼
     CTableViewCell* dequeueCell();
-	// ÖØĞÂ¼ÓÔØÊı¾İ
+	// é‡æ–°åŠ è½½æ•°æ®
 	void reloadData();
 
-	// Í¨¹ı¿ÉÊÓ·¶Î§´óĞ¡£¬µ¥Ôª¸ñ´óĞ¡£¬µ¥Ôª¸ñÊıÁ¿£¬Êı¾İÊÊÅäÆ÷³õÊ¼»¯
+	// é€šè¿‡å¯è§†èŒƒå›´å¤§å°ï¼Œå•å…ƒæ ¼å¤§å°ï¼Œå•å…ƒæ ¼æ•°é‡ï¼Œæ•°æ®é€‚é…å™¨åˆå§‹åŒ–
 	bool initWithParams(const CCSize& tViewSize, const CCSize& tCellSize, unsigned int uCellCount, 
 		CCObject* pListener, SEL_DataSoucreAdapterHandler pHandler);
 		
