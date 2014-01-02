@@ -32,7 +32,7 @@ NS_CC_WIDGET_BEGIN
 #define CSCROLLVIEW_DEACCELERATE_VA 2000.0f
 #define CSCROLLVIEW_DEACCELERATE_MAX 400.0f
 #define CSCROLLVIEW_DEACCELERATE_INTERVAL 0.245f
-#define CSCROLLVIEW_DEACCELERATE_PERCENTAGE 0.94f
+#define CSCROLLVIEW_DEACCELERATE_PERCENTAGE 0.955f
 #define CSCROLLVIEW_MOVE_INCH 7.0f/160.0f
 #define CSCROLLVIEW_MOVE_ACTION_TAG 1
 #define CSCROLLVIEW_MOVE_EASEIN_RATE 0.5f
@@ -148,8 +148,6 @@ bool CScrollView::initWithSize(const CCSize& tSize)
 	return false;
 }
 
-
-
 CWidgetTouchModel CScrollView::onTouchBegan(CCTouch *pTouch)
 {
     CCPoint tNodePoint = convertToNodeSpace(pTouch->getLocation());
@@ -160,7 +158,7 @@ CWidgetTouchModel CScrollView::onTouchBegan(CCTouch *pTouch)
     }
 	else
 	{
-		 m_pSelectedWidget = NULL;
+		m_pSelectedWidget = NULL;
 	}
     
     if( m_pSelectedWidget )
@@ -168,7 +166,7 @@ CWidgetTouchModel CScrollView::onTouchBegan(CCTouch *pTouch)
 		m_eChildTouchModel = m_pSelectedWidget->executeTouchBeganHandler(pTouch);
         if( m_eChildTouchModel == eWidgetTouchNone )
         {
-           m_pSelectedWidget = NULL;
+			m_pSelectedWidget = NULL;
         }
     }
     
@@ -193,14 +191,12 @@ void CScrollView::onTouchMoved(CCTouch *pTouch, float fDuration)
     {
         if( m_eChildTouchModel == eWidgetTouchTransient && !m_bTouchMoved )
         {
-            float fDistance = ccpDistance(tNodePoint, m_tTouchBeganPoint);
-            
-            if ( !m_bTouchMoved && fabs(ccScrollconvertPointToInch(fDistance)) < CSCROLLVIEW_MOVE_INCH )
+            float fDistance = ccpDistance(tNodePoint, m_tTouchBeganPoint);      
+            if( !m_bTouchMoved && fabs(ccScrollconvertPointToInch(fDistance)) < CSCROLLVIEW_MOVE_INCH )
             {
                 m_pSelectedWidget->executeTouchMovedHandler(pTouch, fDuration);
                 return;
             }
-            
             m_bTouchMoved = true;
             m_pSelectedWidget->interruptTouch(pTouch, fDuration);
         }
@@ -208,7 +204,6 @@ void CScrollView::onTouchMoved(CCTouch *pTouch, float fDuration)
         if( !m_pSelectedWidget->isTouchInterrupted() )
         {
             m_pSelectedWidget->executeTouchMovedHandler(pTouch, fDuration);
-            
             if( !m_pSelectedWidget->isTouchInterrupted() )
             {
                 return;
@@ -248,9 +243,11 @@ void CScrollView::onTouchMoved(CCTouch *pTouch, float fDuration)
 
 void CScrollView::onTouchEnded(CCTouch *pTouch, float fDuration)
 {
-    if( m_pSelectedWidget && !m_pSelectedWidget->isTouchInterrupted() )
+    if( m_pSelectedWidget && !m_bTouchMoved && !m_pSelectedWidget->isTouchInterrupted() )
     {
         m_pSelectedWidget->executeTouchEndedHandler(pTouch, fDuration);
+		m_bTouchMoved = false;
+		m_bDragging = false;
         return;
     }
 	
@@ -570,6 +567,7 @@ void CScrollView::setContentOffset(CCPoint tOffset)
 	{
 		validateOffset(tOffset);
 	}
+	m_pContainer->stopActionByTag(CSCROLLVIEW_MOVE_ACTION_TAG);
 	m_pContainer->setPosition(tOffset);
     this->onScrolling();
 	this->executeScrollingHandler(this);

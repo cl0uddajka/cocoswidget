@@ -78,6 +78,11 @@ public:
 	// 设置开启多点触摸
 	void setMultiTouchEnabled(bool bEnabled);
 
+	// 设置布局容器是否模态
+	void setModalable(bool bModalable);
+	// 获取是否模态
+	bool isModalable() const;
+
 	// 设置当长点击后移动事件的外部处理函数
 	virtual void setOnTouchMovedAfterLongClickListener(CCObject* pListener, SEL_AfterLongClickHandler pHandler);
 	// 设置当长点击后结束事件的外部处理函数
@@ -121,6 +126,7 @@ protected:
 	float m_fTouchedDuration;
 	bool m_bIsTouched;
 	bool m_bMultiTouchEnabled;
+	bool m_bModalable;
 
 	CCObject* m_pLongClickedWidgetObject;
 	CWidget* m_pSelectedWidget;

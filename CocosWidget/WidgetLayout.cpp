@@ -35,6 +35,7 @@ NS_CC_WIDGET_BEGIN
 CWidgetLayout::CWidgetLayout()
 : m_bIsTouched(false)
 , m_nTouchPriority(0)
+, m_bModalable(false)
 , m_bTouchEnabled(true)
 , m_pSelectedWidget(NULL)
 , m_fTouchedDuration(0.0f)
@@ -282,6 +283,18 @@ void CWidgetLayout::setMultiTouchEnabled(bool bEnabled)
 	}
 }
 
+// 设置布局容器是否模态
+void CWidgetLayout::setModalable(bool bModalable)
+{
+	m_bModalable = bModalable;
+}
+
+// 获取是否模态
+bool CWidgetLayout::isModalable() const
+{
+	return m_bModalable;
+}
+
 bool CWidgetLayout::isTouchEnabled()
 {
 	return m_bTouchEnabled;
@@ -402,7 +415,7 @@ bool CWidgetLayout::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 			m_pSelectedWidget = NULL;
 		}
 	}
-	return false;
+	return m_bModalable;
 }
 
 void CWidgetLayout::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
