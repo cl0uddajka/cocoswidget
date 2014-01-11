@@ -1,16 +1,34 @@
-class CSlider : public CProgressBar, public CWidget
+class CTextRich: public CCNodeRGBA, public CWidget, public CTextRichClickableProtocol
 {
-	CSlider();
-	virtual ~CSlider();
-	virtual bool initWithSlider(const char* pSlider, const char* pProgress);
-	static CSlider* create();
-	static CSlider* create(const char* pSlider, const char* pProgress);
+	CTextRich();
+	virtual ~CTextRich();
+	virtual bool init();
+	static CTextRich* create();
+	
+	const char* getFontName();
+	void setFontName(const char* pFontName);
+	float getFontSize() const;
+	void setFontSize(float fFontSize);
+	unsigned int getMaxLineLength() const;
+	void setMaxLineLength(unsigned int uLen);
+	float getVerticalSpacing() const;
+	void setVerticalSpacing(float fSpacing);
+	
+	void insertElement(const char* pString, 
+		const char* pFontName = NULL, 
+		float fFontSize = 0.0f, 
+		const ccColor3B& tColor = ccc3(255,255,255), 
+		const char* pDescription = NULL);
 
-	virtual void setContentSize(const CCSize& tSize);
-	virtual void setSliderImage(const char* pFile);
-	virtual void setSliderTexture(CCTexture2D* pTexture);
-	virtual void setSliderSpriteFrame(CCSpriteFrame* pFrame);
-	virtual void setSliderSpriteFrameName(const char* pSpriteName);
+	void insertElement(CCNode* pNode,
+		unsigned int uLen = 0,
+		const char* pDescription = NULL);
+
+	void removeAllElements();
+	void reloadData();
+	
+	virtual void setOnTextRichClickScriptHandler(LUA_FUNCTION nHandler);
+	virtual void removeOnTextRichClickScriptHandler();
 	
 	int getUserTag() const;
 	void setUserTag(int nTag);
