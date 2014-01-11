@@ -24,43 +24,48 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef __CCWIDGET_LABELATLAS_H__
-#define __CCWIDGET_LABELATLAS_H__
+#ifndef __CCWIDGET_LAYOUT_H__
+#define __CCWIDGET_LAYOUT_H__
 
 #include "cocos2d.h"
 #include "WidgetMacros.h"
 #include "Widget.h"
+#include "ColorView.h"
+#include "GradientView.h"
 #include "WidgetProtocol.h"
 
 NS_CC_WIDGET_BEGIN
 
 /**
- * class  : CLabelAtlas
+ * class  : CLayout
  * author : Jason lee
  * email  : jason.lee.c@foxmail.com
  * descpt : 
  */
-class CLabelAtlas : public CCLabelAtlas
-, public CWidget
-, public CClickableProtocol
-, public CLongClickableProtocol
+class CLayout : public CCNodeRGBA, public CWidget, public CLayoutableProtocol
 {
 public:
-	CLabelAtlas();
-	virtual ~CLabelAtlas();
+	CLayout();
+	virtual ~CLayout();
 	virtual bool init();
-    static CLabelAtlas* create(const char* pString, const char* charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
-    static CLabelAtlas* create(const char* pString, const char* fntFile);
+	static CLayout* create();
+	static CLayout* create(const CCSize& tContentSize);
+	virtual void setContentSize(const CCSize& tContentSize);
+	CCObject* findViewById(const char* id);
+
+	CC_WIDGET_BACKGROUND;
 
 public:
-	virtual CWidgetTouchModel onTouchBegan(CCTouch* pTouch);
-	virtual void onTouchMoved(CCTouch* pTouch, float fDuration);
-	virtual void onTouchEnded(CCTouch* pTouch, float fDuration);
-	virtual void onTouchCancelled(CCTouch* pTouch, float fDuration);
+    virtual CWidgetTouchModel onTouchBegan(CCTouch* pTouch);
+    virtual void onTouchMoved(CCTouch* pTouch, float fDuration);
+    virtual void onTouchEnded(CCTouch* pTouch, float fDuration);
+    virtual void onTouchCancelled(CCTouch* pTouch, float fDuration);
 
-	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelAtlas);
+protected:
+	CCObject* find(CCArray* pChidren, const char* id);
+
 };
 
 NS_CC_WIDGET_END
 
-#endif //__CCWIDGET_LABELATLAS_H__
+#endif //__CCWIDGET_LAYOUT_H__

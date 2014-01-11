@@ -24,43 +24,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef __CCWIDGET_LABELATLAS_H__
-#define __CCWIDGET_LABELATLAS_H__
+#ifndef __CCWIDGET_TEXTAREA_H__
+#define __CCWIDGET_TEXTAREA_H__
 
 #include "cocos2d.h"
 #include "WidgetMacros.h"
-#include "Widget.h"
 #include "WidgetProtocol.h"
+#include "Widget.h"
+#include "Label.h"
 
 NS_CC_WIDGET_BEGIN
 
-/**
- * class  : CLabelAtlas
- * author : Jason lee
- * email  : jason.lee.c@foxmail.com
- * descpt : 
- */
-class CLabelAtlas : public CCLabelAtlas
-, public CWidget
-, public CClickableProtocol
-, public CLongClickableProtocol
+class CTextArea : public CLabel
 {
 public:
-	CLabelAtlas();
-	virtual ~CLabelAtlas();
-	virtual bool init();
-    static CLabelAtlas* create(const char* pString, const char* charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
-    static CLabelAtlas* create(const char* pString, const char* fntFile);
-
-public:
-	virtual CWidgetTouchModel onTouchBegan(CCTouch* pTouch);
-	virtual void onTouchMoved(CCTouch* pTouch, float fDuration);
-	virtual void onTouchEnded(CCTouch* pTouch, float fDuration);
-	virtual void onTouchCancelled(CCTouch* pTouch, float fDuration);
-
-	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelAtlas);
+	CTextArea();
+	virtual ~CTextArea();
+	static CTextArea* create(const CCSize& tSize);
 };
 
 NS_CC_WIDGET_END
 
-#endif //__CCWIDGET_LABELATLAS_H__
+#endif //__CCWIDGET_TEXTAREA_H__

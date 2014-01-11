@@ -24,43 +24,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef __CCWIDGET_LABELATLAS_H__
-#define __CCWIDGET_LABELATLAS_H__
+#ifndef __CWIDGET_WITLSMACROS_H__
+#define __CWIDGET_WITLSMACROS_H__
 
-#include "cocos2d.h"
-#include "WidgetMacros.h"
-#include "Widget.h"
-#include "WidgetProtocol.h"
+extern inline int str_utf8_char_len(unsigned char ch);
 
-NS_CC_WIDGET_BEGIN
+extern int str_utf8_len(const char* p_str);
 
-/**
- * class  : CLabelAtlas
- * author : Jason lee
- * email  : jason.lee.c@foxmail.com
- * descpt : 
- */
-class CLabelAtlas : public CCLabelAtlas
-, public CWidget
-, public CClickableProtocol
-, public CLongClickableProtocol
-{
-public:
-	CLabelAtlas();
-	virtual ~CLabelAtlas();
-	virtual bool init();
-    static CLabelAtlas* create(const char* pString, const char* charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
-    static CLabelAtlas* create(const char* pString, const char* fntFile);
+extern char* sub_utf8_str(const char* p_str, unsigned int start, unsigned int end);
 
-public:
-	virtual CWidgetTouchModel onTouchBegan(CCTouch* pTouch);
-	virtual void onTouchMoved(CCTouch* pTouch, float fDuration);
-	virtual void onTouchEnded(CCTouch* pTouch, float fDuration);
-	virtual void onTouchCancelled(CCTouch* pTouch, float fDuration);
-
-	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelAtlas);
-};
-
-NS_CC_WIDGET_END
-
-#endif //__CCWIDGET_LABELATLAS_H__
+#endif //__CWIDGET_WITLSMACROS_H__

@@ -24,43 +24,60 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#ifndef __CCWIDGET_LABELATLAS_H__
-#define __CCWIDGET_LABELATLAS_H__
+#ifndef __CCWIDGET_GRADIENTVIEW_H__
+#define __CCWIDGET_GRADIENTVIEW_H__
 
 #include "cocos2d.h"
 #include "WidgetMacros.h"
 #include "Widget.h"
 #include "WidgetProtocol.h"
+#include "ColorView.h"
 
 NS_CC_WIDGET_BEGIN
 
 /**
- * class  : CLabelAtlas
+ * class  : CGradientView
  * author : Jason lee
  * email  : jason.lee.c@foxmail.com
  * descpt : 
  */
-class CLabelAtlas : public CCLabelAtlas
-, public CWidget
-, public CClickableProtocol
-, public CLongClickableProtocol
+class CGradientView : public CColorView
 {
 public:
-	CLabelAtlas();
-	virtual ~CLabelAtlas();
+	CGradientView();
+	virtual ~CGradientView();
 	virtual bool init();
-    static CLabelAtlas* create(const char* pString, const char* charMapFile, unsigned int itemWidth, unsigned int itemHeight, unsigned int startCharMap);
-    static CLabelAtlas* create(const char* pString, const char* fntFile);
+	virtual bool initWithColor(const ccColor4B& tStart, const ccColor4B& tEnd);
+	virtual bool initWithColor(const ccColor4B& tStart, const ccColor4B& tEnd, const CCPoint& v);
+	static CGradientView* create();
+	static CGradientView* create(const ccColor4B& tStart, const ccColor4B& tEnd);
+	static CGradientView* create(const ccColor4B& tStart, const ccColor4B& tEnd, const CCPoint& v);
 
-public:
-	virtual CWidgetTouchModel onTouchBegan(CCTouch* pTouch);
-	virtual void onTouchMoved(CCTouch* pTouch, float fDuration);
-	virtual void onTouchEnded(CCTouch* pTouch, float fDuration);
-	virtual void onTouchCancelled(CCTouch* pTouch, float fDuration);
+	virtual void setStartColor(const ccColor3B& tColor);
+	virtual const ccColor3B& getStartColor();
+	virtual void setEndColor(const ccColor3B& tColor);
+	virtual const ccColor3B& getEndColor();
+	virtual void setStartOpacity(GLubyte cOpacity);
+	virtual GLubyte getStartOpacity();
+	virtual void setEndOpacity(GLubyte cOpacity);
+	virtual GLubyte getEndOpacity();
+	virtual void setVector(const CCPoint& tPoint);
+	virtual const CCPoint& getVector();
+	virtual void setCompressedInterpolation(bool bCompressedInterpolation);
+	virtual bool isCompressedInterpolation();
 
-	CC_WIDGET_LONGCLICK_SCHEDULE(CLabelAtlas);
+protected:
+	virtual void updateColor();
+
+protected:
+	ccColor3B m_tStartColor;
+	ccColor3B m_tEndColor;
+	GLubyte m_cStartOpacity;
+	GLubyte m_cEndOpacity;
+	CCPoint m_tAlongVector;
+	bool m_bCompressedInterpolation;
 };
 
 NS_CC_WIDGET_END
 
-#endif //__CCWIDGET_LABELATLAS_H__
+#endif //__CCWIDGET_GRADIENTVIEW_H__
